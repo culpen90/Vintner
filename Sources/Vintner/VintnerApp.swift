@@ -3,6 +3,7 @@ import VintnerCore
 
 @main
 struct VintnerApp: App {
+    @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @State private var library = BottleLibrary()
     @State private var runner = WineRunner()
 
@@ -25,5 +26,12 @@ struct VintnerApp: App {
             SidebarCommands()
         }
         #endif
+    }
+}
+
+private final class AppDelegate: NSObject, NSApplicationDelegate {
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        NSApp.setActivationPolicy(.regular)
+        NSApp.activate(ignoringOtherApps: true)
     }
 }
